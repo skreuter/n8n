@@ -38,11 +38,11 @@ export const activityOperations: INodeProperties[] = [
 				value: 'delete',
 				description: 'Delete a activity',
 			},
-			// {
-			// 	name: 'Get',
-			// 	value: 'get',
-			// 	description: 'Get a activity',
-			// },
+			{
+				name: 'Get',
+				value: 'get',
+				description: 'Get a activity',
+			},
 			{
 				name: 'Get All',
 				value: 'getAll',

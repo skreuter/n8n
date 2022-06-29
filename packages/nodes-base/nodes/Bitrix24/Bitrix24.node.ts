@@ -1510,7 +1510,109 @@ export class Bitrix24 implements INodeType {
 
 				} else if (resource === 'activity') {
 
+					if (operation === 'create') {
+
+						// ----------------------------------------
+						//               activity: create
+						// ----------------------------------------
+
+						const body: IDataObject = {
+							fields: {
+								TYPE_ID: '1', // meeting
+								SUBJECT: this.getNodeParameter('companyName', i) + ' via Calendly',
+								START_TIME: this.getNodeParameter('startTime', i),
+								END_TIME: this.getNodeParameter('endTime', i),
+								COMMUNICATIONS: [
+									{
+										ENTITY_ID: this.getNodeParameter('leadId', i),
+										ENTITY_TYPE_ID: 1
+									}
+								],
+								RESPONSIBLE_ID: this.getNodeParameter('responsibleId', i),
+								DESCRIPTION: this.getNodeParameter('joinUrl', i),
+							}
+						};
+
+						const additionalFields = this.getNodeParameter('additionalFields', i) as IDataObject;
+
+						if (Object.keys(additionalFields).length) {
+							Object.assign(body, adjustLeadPayload(additionalFields));
+						}
+
+						responseData = await bitrixApiRequest.call(this, 'POST', '/crm.activity.add', body);
+
+					} else if (operation === 'delete') {
+
+						// ----------------------------------------
+						//               activity: delete
+						// ----------------------------------------
+
+						const body: IDataObject = {
+							ID: this.getNodeParameter('activityId', i),
+						};
+
+						responseData = await bitrixApiRequest.call(this, 'POST', '/crm.activity.delete', body);
+
+					} else if (operation === 'get') {
+
+						// ----------------------------------------
+						//                activity: get
+						// ----------------------------------------
+
+						const activityId = this.getNodeParameter('activityId', i);
+
+						responseData = await bitrixApiRequest.call(this, 'GET', `/crm.activity.get?id=${activityId}`);
+
+					} else if (operation === 'getAll') {
+
+						// ----------------------------------------
+						//               activity: getAll
+						// ----------------------------------------
+
+						const qs: IDataObject = {};
+						const options = this.getNodeParameter('options', i) as GetAllFilterOptions;
+
+						addGetAllFilterOptions(qs, options);
+
+						const body: IDataObject = {
+							filter: {
+								OWNER_ID: this.getNodeParameter('leadId', i),
+								OWNER_TYPE_ID: 1, // lead
+								SUBJECT: this.getNodeParameter('companyName', i) + ' via Calendly',
+								START_TIME: this.getNodeParameter('startTime', i),
+								END_TIME: this.getNodeParameter('endTime', i),
+							}
+						};
+
+						responseData = await handleListing.call(this, 'POST', '/crm.activity.list', body);
+
+					}
+
 				} else if (resource === 'comment') {
+
+					if (operation === 'create') {
+
+						// ----------------------------------------
+						//               comment: create
+						// ----------------------------------------
+
+						const body: IDataObject = {
+							fields: {
+								ENTITY_ID: this.getNodeParameter('leadId', i),
+								ENTITY_TYPE: 'lead',
+								COMMENT: this.getNodeParameter('message', i),
+							}
+						};
+
+						const additionalFields = this.getNodeParameter('additionalFields', i) as IDataObject;
+
+						if (Object.keys(additionalFields).length) {
+							Object.assign(body, adjustLeadPayload(additionalFields));
+						}
+
+						responseData = await bitrixApiRequest.call(this, 'POST', '/crm.timeline.comment.add', body);
+
+					}
 
 				}
 
