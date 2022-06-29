@@ -47,11 +47,7 @@ export async function bitrixApiRequest(
 	const authUrl = credentials.authUrl.replace(/\/$/g, '');
 
 	const options: OptionsWithUri = {
-		body: {
-			data: [
-				body,
-			],
-		},
+		body,
 		method,
 		qs,
 		uri: uri ?? `${authUrl}${endpoint}`,
@@ -67,7 +63,6 @@ export async function bitrixApiRequest(
 	}
 
 	try {
-		console.log(options);
 		const responseData = await this.helpers.request!(options);
 
 		if (responseData === undefined) return [];
@@ -81,7 +76,7 @@ export async function bitrixApiRequest(
 }
 
 /**
- * Make an authenticated API request to Zoho CRM API and return all items.
+ * Make an authenticated API request to API and return all items.
  */
 export async function bitrixApiRequestAllItems(
 	this: IHookFunctions | IExecuteFunctions | ILoadOptionsFunctions,
@@ -93,24 +88,25 @@ export async function bitrixApiRequestAllItems(
 	const returnData: IDataObject[] = [];
 
 	let responseData;
-	qs.per_page = 200;
-	qs.page = 1;
 
-	do {
-		responseData = await bitrixApiRequest.call(this, method, endpoint, body, qs);
+	// TODO: pagination
+	// qs.per_page = 200;
+	// qs.page = 1;
+
+	// do {
+		responseData = await bitrixApiRequest.call(this, method, endpoint, body);
 		if (Array.isArray(responseData) && !responseData.length) return returnData;
-		returnData.push(...responseData.data);
-		qs.page++;
-	} while (
-		responseData.info.more_records !== undefined &&
-		responseData.info.more_records === true
-	);
+		returnData.push(...responseData.result);
+		//qs.page++;
+	// } while (
+	// 	responseData.next !== undefined
+	// );
 
 	return returnData;
 }
 
 /**
- * Handle a Zoho CRM API listing by returning all items or up to a limit.
+ * Handle a API listing by returning all items or up to a limit.
  */
 export async function handleListing(
 	this: IExecuteFunctions,
@@ -119,12 +115,13 @@ export async function handleListing(
 	body: IDataObject = {},
 	qs: IDataObject = {},
 ) {
-	const returnAll = this.getNodeParameter('returnAll', 0) as boolean;
+	const returnAll = true; // this.getNodeParameter('returnAll', 0) as boolean;
 
 	if (returnAll) {
 		return await bitrixApiRequestAllItems.call(this, method, endpoint, body, qs);
 	}
 
+	// TODO: pagination (returnAll != true)
 	const responseData = await bitrixApiRequestAllItems.call(this, method, endpoint, body, qs);
 	const limit = this.getNodeParameter('limit', 0) as number;
 
@@ -350,7 +347,7 @@ export const adjustProductPayload = adjustCustomFields;
 const omit = (propertyToOmit: string, { [propertyToOmit]: _, ...remainingObject }) => remainingObject;
 
 /**
- * Convert items in a Zoho CRM API response into n8n load options.
+ * Convert items in a API response into n8n load options.
  */
 export const toLoadOptions = (items: ResourceItems, nameProperty: NameType) =>
 	items.map((item) => ({ name: item[nameProperty], value: item.id }));
