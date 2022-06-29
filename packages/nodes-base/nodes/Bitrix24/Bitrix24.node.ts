@@ -100,10 +100,10 @@ export class Bitrix24 implements INodeType {
 				type: 'options',
 				noDataExpression: true,
 				options: [
-					{
-						name: 'Account',
-						value: 'account',
-					},
+					// {
+					// 	name: 'Account',
+					// 	value: 'account',
+					// },
 					{
 						name: 'Activity',
 						value: 'activity',
@@ -112,42 +112,42 @@ export class Bitrix24 implements INodeType {
 						name: 'Comment',
 						value: 'comment',
 					},
-					{
-						name: 'Contact',
-						value: 'contact',
-					},
-					{
-						name: 'Deal',
-						value: 'deal',
-					},
-					{
-						name: 'Invoice',
-						value: 'invoice',
-					},
+					// {
+					// 	name: 'Contact',
+					// 	value: 'contact',
+					// },
+					// {
+					// 	name: 'Deal',
+					// 	value: 'deal',
+					// },
+					// {
+					// 	name: 'Invoice',
+					// 	value: 'invoice',
+					// },
 					{
 						name: 'Lead',
 						value: 'lead',
 					},
-					{
-						name: 'Product',
-						value: 'product',
-					},
-					{
-						name: 'Purchase Order',
-						value: 'purchaseOrder',
-					},
-					{
-						name: 'Quote',
-						value: 'quote',
-					},
-					{
-						name: 'Sales Order',
-						value: 'salesOrder',
-					},
-					{
-						name: 'Vendor',
-						value: 'vendor',
-					},
+					// {
+					// 	name: 'Product',
+					// 	value: 'product',
+					// },
+					// {
+					// 	name: 'Purchase Order',
+					// 	value: 'purchaseOrder',
+					// },
+					// {
+					// 	name: 'Quote',
+					// 	value: 'quote',
+					// },
+					// {
+					// 	name: 'Sales Order',
+					// 	value: 'salesOrder',
+					// },
+					// {
+					// 	name: 'Vendor',
+					// 	value: 'vendor',
+					// },
 				],
 				default: 'account',
 			},

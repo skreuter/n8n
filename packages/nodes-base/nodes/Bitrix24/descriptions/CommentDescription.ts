@@ -28,36 +28,36 @@ export const commentOperations: INodeProperties[] = [
 				value: 'create',
 				description: 'Create a comment',
 			},
-			{
-				name: 'Create or Update',
-				value: 'upsert',
-				description: 'Create a new record, or update the current one if it already exists (upsert)',
-			},
-			{
-				name: 'Delete',
-				value: 'delete',
-				description: 'Delete a comment',
-			},
-			{
-				name: 'Get',
-				value: 'get',
-				description: 'Get a comment',
-			},
-			{
-				name: 'Get All',
-				value: 'getAll',
-				description: 'Get all comments',
-			},
-			{
-				name: 'Get Fields',
-				value: 'getFields',
-				description: 'Get comment fields',
-			},
-			{
-				name: 'Update',
-				value: 'update',
-				description: 'Update a comment',
-			},
+			// {
+			// 	name: 'Create or Update',
+			// 	value: 'upsert',
+			// 	description: 'Create a new record, or update the current one if it already exists (upsert)',
+			// },
+			// {
+			// 	name: 'Delete',
+			// 	value: 'delete',
+			// 	description: 'Delete a comment',
+			// },
+			// {
+			// 	name: 'Get',
+			// 	value: 'get',
+			// 	description: 'Get a comment',
+			// },
+			// {
+			// 	name: 'Get All',
+			// 	value: 'getAll',
+			// 	description: 'Get all comments',
+			// },
+			// {
+			// 	name: 'Get Fields',
+			// 	value: 'getFields',
+			// 	description: 'Get comment fields',
+			// },
+			// {
+			// 	name: 'Update',
+			// 	value: 'update',
+			// 	description: 'Update a comment',
+			// },
 		],
 		default: 'create',
 	},
