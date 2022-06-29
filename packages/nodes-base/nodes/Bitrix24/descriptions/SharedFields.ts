@@ -319,12 +319,53 @@ export const makeGetAllFields = (resource: CamelCaseResource): INodeProperties[]
 	const loadOptionsMethod = `get${capitalizeInitial(resource)}Fields`;
 
 	return [
+		// {
+		// 	displayName: 'Return All',
+		// 	name: 'returnAll',
+		// 	type: 'boolean',
+		// 	default: false,
+		// 	description: 'Whether to return all results or only up to a given limit',
+		// 	displayOptions: {
+		// 		show: {
+		// 			resource: [
+		// 				resource,
+		// 			],
+		// 			operation: [
+		// 				'getAll',
+		// 			],
+		// 		},
+		// 	},
+		// },
+		// {
+		// 	displayName: 'Limit',
+		// 	name: 'limit',
+		// 	type: 'number',
+		// 	default: 5,
+		// 	description: 'Max number of results to return',
+		// 	typeOptions: {
+		// 		minValue: 1,
+		// 		maxValue: 1000,
+		// 	},
+		// 	displayOptions: {
+		// 		show: {
+		// 			resource: [
+		// 				resource,
+		// 			],
+		// 			operation: [
+		// 				'getAll',
+		// 			],
+		// 			returnAll: [
+		// 				false,
+		// 			],
+		// 		},
+		// 	},
+		// },
 		{
-			displayName: 'Return All',
-			name: 'returnAll',
-			type: 'boolean',
-			default: false,
-			description: 'Whether to return all results or only up to a given limit',
+			displayName: 'Filter By',
+			name: 'filterBy',
+			type: 'string',
+			default: '',
+			description: 'Field to filter records by',
 			displayOptions: {
 				show: {
 					resource: [
@@ -337,15 +378,11 @@ export const makeGetAllFields = (resource: CamelCaseResource): INodeProperties[]
 			},
 		},
 		{
-			displayName: 'Limit',
-			name: 'limit',
-			type: 'number',
-			default: 5,
-			description: 'Max number of results to return',
-			typeOptions: {
-				minValue: 1,
-				maxValue: 1000,
-			},
+			displayName: 'Filter Value',
+			name: 'filterValue',
+			type: 'string',
+			default: '',
+			description: 'Value to filter records by',
 			displayOptions: {
 				show: {
 					resource: [
@@ -353,9 +390,6 @@ export const makeGetAllFields = (resource: CamelCaseResource): INodeProperties[]
 					],
 					operation: [
 						'getAll',
-					],
-					returnAll: [
-						false,
 					],
 				},
 			},
@@ -377,37 +411,37 @@ export const makeGetAllFields = (resource: CamelCaseResource): INodeProperties[]
 				},
 			},
 			options: [
-				{
-					displayName: 'Approved',
-					name: 'approved',
-					type: 'boolean',
-					default: true,
-					description: 'Whether to retrieve only approved records. Defaults to true.',
-				},
-				{
-					displayName: 'Converted',
-					name: 'converted',
-					type: 'boolean',
-					default: false,
-					description: 'Whether to retrieve only converted records. Defaults to false.',
-				},
-				{
-					displayName: 'Fields',
-					name: 'fields',
-					type: 'multiOptions',
-					typeOptions: {
-						loadOptionsMethod,
-					},
-					default: [],
-					description: 'Return only these fields',
-				},
-				{
-					displayName: 'Include Child',
-					name: 'include_child',
-					type: 'boolean',
-					default: false,
-					description: 'Whether to retrieve only records from child territories',
-				},
+				// {
+				// 	displayName: 'Approved',
+				// 	name: 'approved',
+				// 	type: 'boolean',
+				// 	default: true,
+				// 	description: 'Whether to retrieve only approved records. Defaults to true.',
+				// },
+				// {
+				// 	displayName: 'Converted',
+				// 	name: 'converted',
+				// 	type: 'boolean',
+				// 	default: false,
+				// 	description: 'Whether to retrieve only converted records. Defaults to false.',
+				// },
+				// {
+				// 	displayName: 'Fields',
+				// 	name: 'fields',
+				// 	type: 'multiOptions',
+				// 	typeOptions: {
+				// 		loadOptionsMethod,
+				// 	},
+				// 	default: [],
+				// 	description: 'Return only these fields',
+				// },
+				// {
+				// 	displayName: 'Include Child',
+				// 	name: 'include_child',
+				// 	type: 'boolean',
+				// 	default: false,
+				// 	description: 'Whether to retrieve only records from child territories',
+				// },
 				{
 					displayName: 'Sort By',
 					name: 'sort_by',
@@ -435,13 +469,13 @@ export const makeGetAllFields = (resource: CamelCaseResource): INodeProperties[]
 					default: 'desc',
 					description: 'Ascending or descending order sort order',
 				},
-				{
-					displayName: 'Territory ID',
-					name: 'territory_id',
-					type: 'string',
-					default: '',
-					description: 'Retrieve only records from this territory',
-				},
+				// {
+				// 	displayName: 'Territory ID',
+				// 	name: 'territory_id',
+				// 	type: 'string',
+				// 	default: '',
+				// 	description: 'Retrieve only records from this territory',
+				// },
 			],
 		},
 	];
