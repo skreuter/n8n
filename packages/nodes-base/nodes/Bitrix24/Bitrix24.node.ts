@@ -885,7 +885,19 @@ export class Bitrix24 implements INodeType {
 
 						addGetAllFilterOptions(qs, options);
 
-						responseData = await handleListing.call(this, 'GET', '/leads', {}, qs);
+						const body: IDataObject = {
+							filter: {}
+						};
+
+						const filterBy = this.getNodeParameter('filterBy', i) as string;
+						const filterValue = this.getNodeParameter('filterValue', i) as string;
+						if (filterBy) {
+							body.filter = {
+								[filterBy]: filterValue,
+							}
+						}
+
+						responseData = await handleListing.call(this, 'POST', '/crm.lead.list', body); //, qs);
 
 					} else if (operation === 'getFields') {
 
