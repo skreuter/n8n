@@ -4,7 +4,7 @@ import { IDataObject } from "n8n-workflow";
 //          for generic functions
 // ----------------------------------------
 
-type Resource = 'account' | 'contact' | 'deal' | 'invoice' | 'lead' | 'product' | 'quote' | 'vendor';
+type Resource = 'account' | 'contact' | 'deal' | 'invoice' | 'lead' | 'product' | 'quote' | 'vendor' | 'activity' | 'comment';
 
 export type CamelCaseResource = Resource | 'purchaseOrder' | 'salesOrder';
 

@@ -8,3 +8,5 @@ export * from './PurchaseOrderDescription';
 export * from './QuoteDescription';
 export * from './SalesOrderDescription';
 export * from './VendorDescription';
+export * from './ActivityDescription';
+export * from './CommentDescription';

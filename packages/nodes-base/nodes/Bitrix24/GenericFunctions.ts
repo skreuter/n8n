@@ -388,6 +388,8 @@ export function getModuleName(resource: string) {
 		salesOrder: 'Sales_Orders',
 		vendor: 'Vendors',
 		quote: 'Quotes',
+		activity: 'Activities',
+		comment: 'Comments',
 	};
 
 	return map[resource];

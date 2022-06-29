@@ -67,6 +67,10 @@ import {
 	salesOrderOperations,
 	vendorFields,
 	vendorOperations,
+	activityFields,
+	activityOperations,
+	commentFields,
+	commentOperations,
 } from './descriptions';
 
 export class Bitrix24 implements INodeType {
@@ -99,6 +103,14 @@ export class Bitrix24 implements INodeType {
 					{
 						name: 'Account',
 						value: 'account',
+					},
+					{
+						name: 'Activity',
+						value: 'activity',
+					},
+					{
+						name: 'Comment',
+						value: 'comment',
 					},
 					{
 						name: 'Contact',
@@ -159,6 +171,10 @@ export class Bitrix24 implements INodeType {
 			...salesOrderFields,
 			...vendorOperations,
 			...vendorFields,
+			...activityOperations,
+			...activityFields,
+			...commentOperations,
+			...commentFields,
 		],
 	};
 
@@ -243,6 +259,15 @@ export class Bitrix24 implements INodeType {
 				return getFields.call(this, 'vendor');
 			},
 
+			async getActivityFields(this: ILoadOptionsFunctions) {
+				return getFields.call(this, 'activity');
+			},
+
+			async getCommentFields(this: ILoadOptionsFunctions) {
+				return getFields.call(this, 'comment');
+			},
+			
+
 			// custom fields
 
 			async getCustomAccountFields(this: ILoadOptionsFunctions) {
@@ -287,6 +312,14 @@ export class Bitrix24 implements INodeType {
 
 			async getCustomVendorFields(this: ILoadOptionsFunctions) {
 				return getFields.call(this, 'vendor', { onlyCustom: true });
+			},
+
+			async getCustomActivityFields(this: ILoadOptionsFunctions) {
+				return getFields.call(this, 'activity', { onlyCustom: true });
+			},
+
+			async getCustomCommentFields(this: ILoadOptionsFunctions) {
+				return getFields.call(this, 'comment', { onlyCustom: true });
 			},
 
 			// ----------------------------------------
@@ -1462,6 +1495,10 @@ export class Bitrix24 implements INodeType {
 						responseData = responseData.data[0].details;
 
 					}
+
+				} else if (resource === 'activity') {
+
+				} else if (resource === 'comment') {
 
 				}
 
