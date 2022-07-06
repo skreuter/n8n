@@ -387,6 +387,7 @@ export function getModuleName(resource: string) {
 		quote: 'Quotes',
 		activity: 'Activities',
 		comment: 'Comments',
+		message: 'Messages',
 	};
 
 	return map[resource];

@@ -71,6 +71,8 @@ import {
 	activityOperations,
 	commentFields,
 	commentOperations,
+	messageFields,
+	messageOperations,
 } from './descriptions';
 
 export class Bitrix24 implements INodeType {
@@ -125,6 +127,10 @@ export class Bitrix24 implements INodeType {
 					// 	value: 'invoice',
 					// },
 					{
+						name: 'Message',
+						value: 'message',
+					},
+					{
 						name: 'Lead',
 						value: 'lead',
 					},
@@ -149,7 +155,7 @@ export class Bitrix24 implements INodeType {
 					// 	value: 'vendor',
 					// },
 				],
-				default: 'account',
+				default: 'lead',
 			},
 			...accountOperations,
 			...accountFields,
@@ -175,6 +181,8 @@ export class Bitrix24 implements INodeType {
 			...activityFields,
 			...commentOperations,
 			...commentFields,
+			...messageOperations,
+			...messageFields,
 		],
 	};
 
@@ -266,6 +274,10 @@ export class Bitrix24 implements INodeType {
 			async getCommentFields(this: ILoadOptionsFunctions) {
 				return getFields.call(this, 'comment');
 			},
+
+			async getMessageFields(this: ILoadOptionsFunctions) {
+				return getFields.call(this, 'message');
+			},
 			
 
 			// custom fields
@@ -320,6 +332,10 @@ export class Bitrix24 implements INodeType {
 
 			async getCustomCommentFields(this: ILoadOptionsFunctions) {
 				return getFields.call(this, 'comment', { onlyCustom: true });
+			},
+
+			async getCustomMessageFields(this: ILoadOptionsFunctions) {
+				return getFields.call(this, 'message', { onlyCustom: true });
 			},
 
 			// ----------------------------------------
@@ -1604,13 +1620,26 @@ export class Bitrix24 implements INodeType {
 							}
 						};
 
-						const additionalFields = this.getNodeParameter('additionalFields', i) as IDataObject;
-
-						if (Object.keys(additionalFields).length) {
-							Object.assign(body, adjustLeadPayload(additionalFields));
-						}
-
 						responseData = await bitrixApiRequest.call(this, 'POST', '/crm.timeline.comment.add', body);
+
+					}
+
+				} else if (resource === 'message') {
+
+					if (operation === 'create') {
+
+						// ----------------------------------------
+						//               message: create
+						// ----------------------------------------
+
+						const body: IDataObject = {
+							fields: {
+								CHAT_ID: this.getNodeParameter('chatId', i),
+								MESSAGE: this.getNodeParameter('message', i),
+							}
+						};
+
+						responseData = await bitrixApiRequest.call(this, 'POST', '/im.message.add.json', body);
 
 					}
 

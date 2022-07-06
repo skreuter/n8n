@@ -10,3 +10,4 @@ export * from './SalesOrderDescription';
 export * from './VendorDescription';
 export * from './ActivityDescription';
 export * from './CommentDescription';
+export * from './MessageDescription';
