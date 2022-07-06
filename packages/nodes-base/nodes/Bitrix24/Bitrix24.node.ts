@@ -1632,14 +1632,12 @@ export class Bitrix24 implements INodeType {
 						//               message: create
 						// ----------------------------------------
 
-						const body: IDataObject = {
-							fields: {
-								CHAT_ID: this.getNodeParameter('chatId', i),
-								MESSAGE: this.getNodeParameter('message', i),
-							}
+						const qs: IDataObject = {
+							CHAT_ID: this.getNodeParameter('chatId', i),
+							MESSAGE: this.getNodeParameter('message', i),
 						};
 
-						responseData = await bitrixApiRequest.call(this, 'POST', '/im.message.add.json', body);
+						responseData = await bitrixApiRequest.call(this, 'POST', '/im.message.add.json', {}, qs);
 
 					}
 
